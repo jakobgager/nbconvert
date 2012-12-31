@@ -170,7 +170,7 @@ class ConverterLaTeX(Converter):
     def _img_lines(self, img_file):
         rel_img_position = os.path.relpath(img_file, self.infile_dir)
         return self.in_env('center', 
-            [r'\includegraphics[width=0.7\textwidth]{%s}' % rel_img_position, 
+            [r'\includegraphics[width=0.7\textwidth, height=0.6\textwidth, keepaspectratio=True]{%s}' % rel_img_position, 
              r'\par'])
 
     def _svg_lines(self, img_file):
