@@ -22,7 +22,7 @@ import sys
 
 # Our own imports
 from .base import Converter
-from .utils import markdown2latex, remove_ansi
+from .utils import markdown2latex, remove_ansi, html2latex
 
 
 #-----------------------------------------------------------------------------
@@ -77,7 +77,7 @@ class ConverterLaTeX(Converter):
                    5: r'\subparagraph',
                    6: r'\subparagraph'}
     user_preamble = None
-    display_data_priority = ['latex', 'pdf', 'svg', 'png', 'jpg', 'text']
+    display_data_priority = ['latex', 'pdf', 'svg', 'png', 'jpg', 'html', 'text']
 
     def in_env(self, environment, lines):
         """Return list of environment lines for input lines
@@ -190,7 +190,10 @@ class ConverterLaTeX(Converter):
         if 'latex' in output:
             lines.extend(self.in_env(self.equation_env, 
                          output.latex.lstrip('$$').rstrip('$$')))
-        #use text only if no latex representation is available
+        # process html type output
+        elif 'html' in output:
+            lines.extend([html2latex(output.html)])
+        # use text only if no latex representation is available
         elif 'text' in output:
             lines.extend(self.in_env('verbatim', output.text))
 
@@ -216,7 +219,7 @@ class ConverterLaTeX(Converter):
         return self.in_env('verbatim', output.text.strip())
 
     def render_display_format_html(self, output):
-        return []
+        return [html2latex(output.html)]
 
     def render_display_format_latex(self, output):
         return self.in_env(self.equation_env, 
