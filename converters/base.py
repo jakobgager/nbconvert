@@ -254,7 +254,7 @@ class Converter(object):
         fullname = os.path.join(self.files_dir, figname)
 
         # Binary files are base64-encoded, SVG is already XML
-        if fmt in ('png', 'jpg', 'pdf'):
+        if fmt in ('png', 'jpg', 'jpeg', 'pdf'):
             data = data.decode('base64')
             fopen = lambda fname: open(fname, 'wb')
         else:
@@ -306,7 +306,7 @@ class Converter(object):
                 raise RuntimeError('no display data')
 
         # Is it an image?
-        if fmt in ['png', 'svg', 'jpg', 'pdf']:
+        if fmt in ['png', 'svg', 'jpg', 'jpeg', 'pdf']:
             img_file = self._new_figure(output[fmt], fmt)
             # Subclasses can have format-specific render functions (e.g.,
             # latex has to auto-convert all SVG to PDF first).
