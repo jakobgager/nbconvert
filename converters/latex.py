@@ -206,7 +206,7 @@ class ConverterLaTeX(Converter):
                 lines_fun = self._img_lines
             lines = lines_fun(img_file)
         # use text 
-        elif 'text' in output:
+        elif fmt == 'text':
             lines.extend(self.in_env('verbatim', output.text))
 
         return lines
