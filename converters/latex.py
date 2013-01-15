@@ -192,8 +192,12 @@ class ConverterLaTeX(Converter):
 
         # output is a dictionary like object with type as a key
         if fmt == 'latex':
-            lines.extend(self.in_env(self.equation_env, 
+            # check if math
+            if output.latex.startswith('$$') and output.latex.endswith('$$'):
+                lines.extend(self.in_env(self.equation_env, 
                          output.latex.lstrip('$$').rstrip('$$')))
+            else:
+                lines.extend([output.latex])
         # process html type output
         elif fmt == 'html':
             lines.extend([html2latex(output.html.replace('/files/',''))])
