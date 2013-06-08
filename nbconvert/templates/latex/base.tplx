@@ -71,9 +71,10 @@ it introduces a new line
 ((* endblock *))
 
 ((* block data_latex -*))
-\begin{equation*}
-((( output.latex | rm_dollars)))
-\end{equation*}
+((*- if output.latex.startswith('$'): -*)) \begin{equation*}
+    ((( output.latex | rm_dollars)))
+    \end{equation*}
+((*- else -*)) ((( output.latex ))) ((*- endif *))
 ((* endblock *))
 
 ((* block stream *))
@@ -86,7 +87,7 @@ it introduces a new line
 ((* endblock markdowncell *))
 
 ((* block headingcell scoped *))
-\section{((( cell.source)))}
+\section{((( cell.source )))}
 ((* endblock headingcell *))
 
 ((* block rawcell scoped *))
