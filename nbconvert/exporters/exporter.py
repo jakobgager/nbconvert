@@ -61,6 +61,7 @@ default_filters = {
         'highlight2html': nbconvert.filters.highlight.highlight,
         'highlight2latex': nbconvert.filters.highlight.highlight2latex,
         'markdown2latex': nbconvert.filters.markdown.markdown2latex,
+        'extended_markdown2latex': nbconvert.filters.markdown.extended_markdown2latex,
         'markdown2rst': nbconvert.filters.markdown.markdown2rst,
         'pycomment': nbconvert.filters.strings.python_comment,
         'rm_ansi': nbconvert.filters.ansi.remove_ansi,
